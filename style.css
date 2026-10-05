@@ -1,0 +1,594 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    background-color: #08090d;
+    background-image:
+        linear-gradient(rgba(255, 255, 255, 0.025) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.025) 1px, transparent 1px);
+    background-size: 45px 45px;
+
+    color: white;
+    font-family: Arial, sans-serif;
+    min-height: 100vh;
+}
+
+
+/* =========================
+   NAVBAR
+========================= */
+
+nav {
+    height: 74px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 0 max(25px, 7%);
+
+    background: rgba(8, 9, 13, 0.92);
+
+    border-bottom: 1px solid #24262e;
+
+    position: sticky;
+    top: 0;
+    z-index: 100;
+
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+}
+
+
+/* LOGO */
+
+.logo {
+    font-size: 22px;
+    font-weight: 800;
+    letter-spacing: -0.5px;
+    color: #ffffff;
+}
+
+.logo span {
+    color: #ff3030;
+}
+
+
+/* NAV RIGHT */
+
+.badge {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
+    background: #111319;
+
+    color: #9da3b0;
+
+    padding: 9px 14px;
+
+    border: 1px solid #292c35;
+
+    border-radius: 9px;
+
+    font-size: 12px;
+    font-weight: 600;
+
+    transition: 0.2s;
+}
+
+.badge::before {
+    content: "";
+
+    width: 7px;
+    height: 7px;
+
+    background: #45d483;
+
+    border-radius: 50%;
+
+    box-shadow:
+        0 0 8px rgba(69, 212, 131, 0.5);
+}
+
+.badge:hover {
+    color: white;
+
+    border-color: #3a3d47;
+
+    background: #15171e;
+}
+
+
+/* =========================
+   HERO
+========================= */
+
+.hero {
+    text-align: center;
+
+    padding: 95px 20px 55px;
+
+    position: relative;
+}
+
+.hero h1 {
+    position: relative;
+
+    font-size: clamp(44px, 7vw, 68px);
+
+    font-weight: 900;
+
+    letter-spacing: -3px;
+
+    line-height: 1.05;
+}
+
+.hero h1 span {
+    color: #ff3030;
+}
+
+.hero p {
+    color: #858b99;
+
+    margin-top: 18px;
+
+    font-size: 15px;
+}
+
+
+/* =========================
+   SEARCH
+========================= */
+
+#search {
+    width: 100%;
+    max-width: 620px;
+
+    margin-top: 32px;
+
+    padding: 17px 20px;
+
+    background: #101218;
+
+    border: 1px solid #292c35;
+
+    border-radius: 11px;
+
+    outline: none;
+
+    color: white;
+
+    font-size: 14px;
+
+    box-shadow:
+        0 10px 30px rgba(0, 0, 0, 0.2);
+
+    transition: 0.2s;
+}
+
+#search::placeholder {
+    color: #606673;
+}
+
+#search:hover {
+    border-color: #373a45;
+}
+
+#search:focus {
+    border-color: #ff3030;
+
+    box-shadow:
+        0 0 0 3px rgba(255, 48, 48, 0.08);
+}
+
+
+/* =========================
+   TABS
+========================= */
+
+.tabs {
+    max-width: 1100px;
+
+    margin: 0 auto;
+
+    padding: 0 20px 32px;
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    gap: 12px;
+}
+
+.tab {
+    background: #101218;
+
+    border: 1px solid #292c35;
+
+    color: #858b99;
+
+    padding: 13px 24px;
+
+    min-width: 100px;
+
+    border-radius: 9px;
+
+    cursor: pointer;
+
+    font-size: 13px;
+
+    font-weight: 600;
+
+    text-align: center;
+
+    transition:
+        background 0.2s ease,
+        border-color 0.2s ease,
+        color 0.2s ease,
+        transform 0.2s ease;
+}
+
+.tab:hover {
+    color: white;
+
+    background: #15171e;
+
+    border-color: #3a3d47;
+
+    transform: translateY(-2px);
+}
+
+.tab.active {
+    background: #ff3030;
+
+    border-color: #ff3030;
+
+    color: white;
+
+    box-shadow:
+        0 6px 18px rgba(255, 48, 48, 0.18);
+}
+
+
+/* MOBILE */
+
+@media (max-width: 600px) {
+
+    .tabs {
+        justify-content: flex-start;
+
+        overflow-x: auto;
+
+        flex-wrap: nowrap;
+
+        padding-left: 18px;
+        padding-right: 18px;
+
+        scrollbar-width: none;
+    }
+
+    .tabs::-webkit-scrollbar {
+        display: none;
+    }
+
+    .tab {
+        flex-shrink: 0;
+
+        padding: 12px 20px;
+
+        min-width: 95px;
+    }
+}
+
+/* =========================
+   TOOLS
+========================= */
+
+#tools {
+    max-width: 1100px;
+
+    margin: auto;
+
+    padding: 0 20px 80px;
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(auto-fit, minmax(290px, 1fr));
+
+    gap: 16px;
+}
+
+
+/* =========================
+   CARD
+========================= */
+
+.tool-card {
+    background: #101218;
+
+    border: 1px solid #22252e;
+
+    border-radius: 14px;
+
+    padding: 21px;
+
+    transition:
+        transform 0.2s ease,
+        border-color 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.tool-card:hover {
+    transform: translateY(-4px);
+
+    border-color: #383c47;
+
+    box-shadow:
+        0 15px 35px rgba(0, 0, 0, 0.25);
+}
+
+
+/* =========================
+   CARD HEADER
+========================= */
+
+.tool-header {
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    gap: 10px;
+}
+
+.tool-header h2 {
+    font-size: 17px;
+
+    font-weight: 700;
+}
+
+.tool-header span {
+    flex-shrink: 0;
+
+    font-size: 10px;
+
+    color: #ff6666;
+
+    background: #1d1113;
+
+    border: 1px solid #32181a;
+
+    padding: 5px 8px;
+
+    border-radius: 6px;
+}
+
+
+/* =========================
+   DESCRIPTION
+========================= */
+
+.tool-card p {
+    color: #858b99;
+
+    font-size: 13px;
+
+    line-height: 1.6;
+
+    margin: 14px 0 17px;
+
+    min-height: 42px;
+}
+
+
+/* =========================
+   TAGS
+========================= */
+
+.tags {
+    display: flex;
+
+    gap: 6px;
+
+    margin-bottom: 18px;
+
+    flex-wrap: wrap;
+}
+
+.tags small {
+    background: #181a21;
+
+    color: #777d89;
+
+    border: 1px solid #22252d;
+
+    padding: 5px 8px;
+
+    border-radius: 5px;
+
+    font-size: 10px;
+}
+
+
+/* =========================
+   BUTTONS
+========================= */
+
+.buttons {
+    display: flex;
+
+    gap: 8px;
+}
+
+.buttons a {
+    flex: 1;
+
+    text-align: center;
+
+    padding: 10px;
+
+    border-radius: 8px;
+
+    text-decoration: none;
+
+    font-size: 11px;
+
+    font-weight: bold;
+
+    transition: 0.2s;
+}
+
+.github {
+    background: #191b22;
+
+    color: white;
+
+    border: 1px solid #292c35;
+}
+
+.github:hover {
+    background: #22252d;
+
+    border-color: #3a3d47;
+}
+
+.download {
+    background: #ff3030;
+
+    color: white;
+}
+
+.download:hover {
+    background: #ff3d3d;
+
+    box-shadow:
+        0 5px 15px rgba(255, 48, 48, 0.18);
+}
+
+
+/* =========================
+   NO RESULTS
+========================= */
+
+.no-results {
+    grid-column: 1 / -1;
+
+    text-align: center;
+
+    padding: 70px 20px;
+
+    color: #666c79;
+
+    font-size: 14px;
+}
+
+
+/* =========================
+   SCROLLBAR
+========================= */
+
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: #08090d;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #292c35;
+
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #3a3d47;
+}
+
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width: 600px) {
+
+    nav {
+        height: 64px;
+
+        padding: 0 18px;
+    }
+
+    .logo {
+        font-size: 18px;
+    }
+
+    .logo::before {
+        width: 31px;
+        height: 31px;
+    }
+
+    .badge {
+        display: none;
+    }
+
+    .hero {
+        padding: 70px 18px 40px;
+    }
+
+    .hero h1 {
+        font-size: 43px;
+
+        letter-spacing: -2px;
+    }
+
+    .hero p {
+        font-size: 13px;
+    }
+
+    #search {
+        margin-top: 27px;
+
+        padding: 15px 17px;
+    }
+
+    .tabs {
+        padding: 0 18px 25px;
+
+        overflow-x: auto;
+
+        flex-wrap: nowrap;
+
+        scrollbar-width: none;
+    }
+
+    .tabs::-webkit-scrollbar {
+        display: none;
+    }
+
+    .tab {
+        flex-shrink: 0;
+    }
+
+    #tools {
+        padding: 0 18px 60px;
+
+        grid-template-columns: 1fr;
+
+        gap: 13px;
+    }
+
+    .tool-card {
+        padding: 19px;
+    }
+}
