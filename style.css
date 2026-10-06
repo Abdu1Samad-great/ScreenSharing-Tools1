@@ -1,7 +1,3 @@
-/* =========================================================
-   RESET
-========================================================= */
-
 * {
     margin: 0;
     padding: 0;
@@ -14,49 +10,25 @@ html {
 
 :root {
     --bg: #07080c;
-    --bg-secondary: #0b0d12;
-    --card: rgba(15, 17, 23, 0.82);
-    --card-solid: #101218;
+    --card: rgba(14, 16, 22, 0.92);
 
     --border: rgba(255, 255, 255, 0.07);
-    --border-hover: rgba(255, 255, 255, 0.14);
+    --border-hover: rgba(255, 255, 255, 0.15);
 
     --text: #f5f5f7;
-    --text-secondary: #9a9fac;
-    --text-muted: #656b78;
+    --text-secondary: #949aa8;
+    --text-muted: #666c79;
 
     --red: #ff3030;
-    --red-light: #ff4b4b;
-    --red-dark: #d92323;
-
     --green: #45d483;
 
     --radius: 14px;
 }
 
-
-/* =========================================================
-   BODY
-========================================================= */
-
 body {
-    background:
-        radial-gradient(
-            circle at 50% -10%,
-            rgba(255, 48, 48, 0.09),
-            transparent 35%
-        ),
-        radial-gradient(
-            circle at 100% 30%,
-            rgba(255, 48, 48, 0.035),
-            transparent 30%
-        ),
-        var(--bg);
-
-    background-attachment: fixed;
-
+    min-height: 100vh;
+    overflow-x: hidden;
     color: var(--text);
-
     font-family:
         Inter,
         -apple-system,
@@ -64,50 +36,32 @@ body {
         "Segoe UI",
         Arial,
         sans-serif;
-
-    min-height: 100vh;
-
-    overflow-x: hidden;
-
     -webkit-font-smoothing: antialiased;
-}
 
+    background-color: var(--bg);
 
-/* subtle grid */
-
-body::before {
-    content: "";
-    position: fixed;
-    inset: 0;
-
+    /* GRID ONLY */
     background-image:
         linear-gradient(
-            rgba(255, 255, 255, 0.018) 1px,
+            rgba(255, 255, 255, 0.028) 1px,
             transparent 1px
         ),
         linear-gradient(
             90deg,
-            rgba(255, 255, 255, 0.018) 1px,
+            rgba(255, 255, 255, 0.028) 1px,
             transparent 1px
         );
 
-    background-size: 48px 48px;
+    background-size:
+        48px 48px,
+        48px 48px;
 
-    pointer-events: none;
-
-    mask-image: linear-gradient(
-        to bottom,
-        black,
-        transparent 80%
-    );
-
-    z-index: -1;
+    background-attachment: fixed;
 }
 
-
-/* =========================================================
+/* =========================
    NAVBAR
-========================================================= */
+========================= */
 
 nav {
     height: 72px;
@@ -120,51 +74,31 @@ nav {
 
     position: sticky;
     top: 0;
-
     z-index: 100;
 
-    background: rgba(7, 8, 12, 0.78);
+    background: rgba(7, 8, 12, 0.82);
 
     backdrop-filter: blur(18px);
     -webkit-backdrop-filter: blur(18px);
 
     border-bottom: 1px solid var(--border);
-
-    box-shadow:
-        0 10px 35px rgba(0, 0, 0, 0.18);
 }
 
-
-/* =========================================================
-   LOGO
-========================================================= */
-
 .logo {
-    display: flex;
-    align-items: center;
-    gap: 9px;
-
     font-size: 21px;
     font-weight: 800;
 
     letter-spacing: -0.7px;
 
-    color: #ffffff;
-
-    user-select: none;
+    color: white;
 }
 
 .logo span {
     color: var(--red);
 
     text-shadow:
-        0 0 22px rgba(255, 48, 48, 0.22);
+        0 0 25px rgba(255, 48, 48, 0.25);
 }
-
-
-/* =========================================================
-   NAV BADGE
-========================================================= */
 
 .badge {
     display: flex;
@@ -175,19 +109,13 @@ nav {
 
     background: rgba(255, 255, 255, 0.025);
 
-    color: #959aa7;
-
     border: 1px solid var(--border);
-
     border-radius: 8px;
+
+    color: #959aa7;
 
     font-size: 11px;
     font-weight: 600;
-
-    transition:
-        background 0.2s ease,
-        border-color 0.2s ease,
-        color 0.2s ease;
 }
 
 .badge::before {
@@ -196,66 +124,28 @@ nav {
     width: 7px;
     height: 7px;
 
-    background: var(--green);
-
     border-radius: 50%;
+
+    background: var(--green);
 
     box-shadow:
         0 0 0 4px rgba(69, 212, 131, 0.07),
         0 0 12px rgba(69, 212, 131, 0.5);
 }
 
-.badge:hover {
-    color: white;
-
-    background: rgba(255, 255, 255, 0.045);
-
-    border-color: var(--border-hover);
-}
-
-
-/* =========================================================
+/* =========================
    HERO
-========================================================= */
+========================= */
 
 .hero {
     position: relative;
 
     text-align: center;
 
-    padding:
-        110px
-        20px
-        65px;
+    padding: 110px 20px 65px;
 }
 
 
-/* red glow behind hero */
-
-.hero::before {
-    content: "";
-
-    position: absolute;
-
-    width: 550px;
-    height: 250px;
-
-    left: 50%;
-    top: 20px;
-
-    transform: translateX(-50%);
-
-    background: rgba(255, 48, 48, 0.055);
-
-    filter: blur(90px);
-
-    border-radius: 50%;
-
-    pointer-events: none;
-}
-
-
-/* heading */
 
 .hero h1 {
     position: relative;
@@ -268,31 +158,22 @@ nav {
 
     line-height: 1;
 
-    color: #ffffff;
-
-    text-shadow:
-        0 10px 40px rgba(0, 0, 0, 0.35);
+    color: white;
 }
 
 .hero h1 span {
     color: var(--red);
 
     text-shadow:
-        0 0 35px rgba(255, 48, 48, 0.18);
+        0 0 35px rgba(255, 48, 48, 0.2);
 }
-
-
-/* subtitle */
 
 .hero p {
     position: relative;
 
     max-width: 620px;
 
-    margin:
-        20px
-        auto
-        0;
+    margin: 20px auto 0;
 
     color: var(--text-secondary);
 
@@ -301,10 +182,9 @@ nav {
     line-height: 1.7;
 }
 
-
-/* =========================================================
+/* =========================
    SEARCH
-========================================================= */
+========================= */
 
 #search {
     position: relative;
@@ -314,17 +194,11 @@ nav {
     width: 100%;
     max-width: 640px;
 
-    margin:
-        34px
-        auto
-        0;
+    margin: 34px auto 0;
 
-    padding:
-        16px
-        19px;
+    padding: 16px 19px;
 
-    background:
-        rgba(15, 17, 23, 0.88);
+    background: rgba(15, 17, 23, 0.9);
 
     border: 1px solid var(--border);
 
@@ -339,11 +213,7 @@ nav {
     box-shadow:
         0 15px 40px rgba(0, 0, 0, 0.2);
 
-    transition:
-        border-color 0.2s ease,
-        background 0.2s ease,
-        box-shadow 0.2s ease,
-        transform 0.2s ease;
+    transition: 0.2s ease;
 }
 
 #search::placeholder {
@@ -351,35 +221,27 @@ nav {
 }
 
 #search:hover {
-    background: rgba(18, 20, 27, 0.95);
-
     border-color: var(--border-hover);
 }
 
 #search:focus {
     border-color: rgba(255, 48, 48, 0.55);
 
-    background: #111319;
-
     box-shadow:
         0 0 0 3px rgba(255, 48, 48, 0.07),
         0 15px 40px rgba(0, 0, 0, 0.25);
 }
 
-
-/* =========================================================
+/* =========================
    TABS
-========================================================= */
+========================= */
 
 .tabs {
     max-width: 1100px;
 
     margin: 0 auto;
 
-    padding:
-        0
-        20px
-        34px;
+    padding: 0 20px 34px;
 
     display: flex;
 
@@ -392,38 +254,28 @@ nav {
 .tab {
     position: relative;
 
+    min-width: 100px;
+
+    padding: 11px 20px;
+
     background: rgba(15, 17, 23, 0.75);
 
     border: 1px solid var(--border);
 
-    color: #858b99;
-
-    padding:
-        11px
-        20px;
-
-    min-width: 100px;
-
     border-radius: 9px;
+
+    color: #858b99;
 
     cursor: pointer;
 
     font-size: 12px;
-
     font-weight: 650;
 
-    text-align: center;
-
-    transition:
-        background 0.2s ease,
-        border-color 0.2s ease,
-        color 0.2s ease,
-        transform 0.2s ease,
-        box-shadow 0.2s ease;
+    transition: 0.2s ease;
 }
 
 .tab:hover {
-    color: #ffffff;
+    color: white;
 
     background: rgba(255, 255, 255, 0.045);
 
@@ -433,7 +285,7 @@ nav {
 }
 
 .tab.active {
-    color: #ffffff;
+    color: white;
 
     background:
         linear-gradient(
@@ -445,45 +297,19 @@ nav {
     border-color: #ff3b3b;
 
     box-shadow:
-        0 7px 22px rgba(255, 48, 48, 0.18),
-        inset 0 1px rgba(255, 255, 255, 0.12);
+        0 7px 22px rgba(255, 48, 48, 0.18);
 }
 
-.tab.active::after {
-    content: "";
-
-    position: absolute;
-
-    left: 25%;
-    right: 25%;
-
-    bottom: -5px;
-
-    height: 2px;
-
-    background: var(--red);
-
-    border-radius: 10px;
-
-    opacity: 0.5;
-
-    filter: blur(1px);
-}
-
-
-/* =========================================================
-   TOOLS GRID
-========================================================= */
+/* =========================
+   TOOLS
+========================= */
 
 #tools {
     max-width: 1100px;
 
     margin: 0 auto;
 
-    padding:
-        0
-        20px
-        90px;
+    padding: 0 20px 90px;
 
     display: grid;
 
@@ -496,15 +322,16 @@ nav {
     gap: 15px;
 }
 
-
-/* =========================================================
-   TOOL CARD
-========================================================= */
+/* =========================
+   CARD
+========================= */
 
 .tool-card {
     position: relative;
 
     overflow: hidden;
+
+    padding: 20px;
 
     background:
         linear-gradient(
@@ -517,17 +344,11 @@ nav {
 
     border-radius: var(--radius);
 
-    padding: 20px;
-
     transition:
         transform 0.22s ease,
         border-color 0.22s ease,
-        box-shadow 0.22s ease,
-        background 0.22s ease;
+        box-shadow 0.22s ease;
 }
-
-
-/* tiny top highlight */
 
 .tool-card::before {
     content: "";
@@ -552,49 +373,29 @@ nav {
 .tool-card:hover {
     transform: translateY(-4px);
 
-    border-color:
-        rgba(255, 255, 255, 0.13);
-
-    background:
-        linear-gradient(
-            145deg,
-            rgba(20, 22, 29, 0.98),
-            rgba(14, 16, 22, 0.98)
-        );
+    border-color: var(--border-hover);
 
     box-shadow:
         0 18px 45px rgba(0, 0, 0, 0.28);
 }
 
+/* =========================
+   HEADER
+========================= */
 
-/* =========================================================
-   CARD HEADER
-========================================================= */
-
-.tool-header {
-    display: flex;
-
-    justify-content: space-between;
-    align-items: flex-start;
-
-    gap: 12px;
-}
-
-.tool-header h2,
 .tool-header h3 {
+    color: #f5f5f7;
+
     font-size: 16px;
 
     font-weight: 750;
 
     letter-spacing: -0.25px;
-
-    color: #f5f5f7;
 }
 
-
-/* =========================================================
+/* =========================
    CREATOR
-========================================================= */
+========================= */
 
 .creator {
     display: inline-block;
@@ -606,18 +407,12 @@ nav {
     font-size: 10px;
 
     font-weight: 650;
-
-    letter-spacing: 0.1px;
-
-    opacity: 0.9;
 }
 
-
-/* =========================================================
+/* =========================
    DESCRIPTION
-========================================================= */
+========================= */
 
-.tool-card p,
 .tool-description {
     color: var(--text-secondary);
 
@@ -625,20 +420,15 @@ nav {
 
     line-height: 1.65;
 
-    margin:
-        13px
-        0
-        16px;
+    margin: 13px 0 16px;
 
     min-height: 40px;
 }
 
-
-/* =========================================================
+/* =========================
    TAGS
-========================================================= */
+========================= */
 
-.tags,
 .tool-tags {
     display: flex;
 
@@ -651,54 +441,41 @@ nav {
     flex-wrap: wrap;
 }
 
-.tags small,
 .tag {
     display: inline-flex;
 
     align-items: center;
 
-    background:
-        rgba(255, 255, 255, 0.025);
+    padding: 4px 7px;
 
-    color: #777e8c;
+    background: rgba(255, 255, 255, 0.025);
 
     border: 1px solid rgba(255, 255, 255, 0.055);
 
-    padding:
-        4px
-        7px;
-
     border-radius: 5px;
+
+    color: #777e8c;
 
     font-size: 9px;
 
     font-weight: 600;
-
-    transition:
-        color 0.2s ease,
-        border-color 0.2s ease,
-        background 0.2s ease;
 }
 
-.tool-card:hover .tag {
-    color: #969ca8;
-
-    border-color:
-        rgba(255, 255, 255, 0.08);
-}
-
-
-/* =========================================================
+/* =========================
    BUTTONS
-========================================================= */
+========================= */
 
 .buttons {
     display: flex;
 
     gap: 8px;
+
+    margin-top: 2px;
 }
 
 .buttons a {
+    position: relative;
+
     flex: 1;
 
     display: flex;
@@ -706,11 +483,9 @@ nav {
     justify-content: center;
     align-items: center;
 
-    min-height: 36px;
+    min-height: 38px;
 
-    padding:
-        9px
-        10px;
+    padding: 9px 14px;
 
     border-radius: 8px;
 
@@ -718,75 +493,181 @@ nav {
 
     font-size: 10px;
 
-    font-weight: 700;
+    font-weight: 750;
+
+    letter-spacing: 0.15px;
+
+    overflow: hidden;
 
     transition:
+        transform 0.2s ease,
         background 0.2s ease,
         border-color 0.2s ease,
-        transform 0.2s ease,
         box-shadow 0.2s ease;
 }
 
 
-/* github */
+/* =========================
+   DOWNLOAD
+========================= */
 
-.github {
-    background: rgba(255, 255, 255, 0.035);
+.download-btn {
+    position: relative;
 
-    color: #eeeeef;
+    color: #ffffff;
 
-    border: 1px solid var(--border);
-}
-
-.github:hover {
-    background: rgba(255, 255, 255, 0.07);
-
-    border-color: var(--border-hover);
-
-    transform: translateY(-1px);
-}
-
-
-/* download */
-
-.download {
     background:
         linear-gradient(
             180deg,
-            #ff3b3b,
-            #ed2828
+            rgba(255, 55, 55, 0.16),
+            rgba(255, 40, 40, 0.08)
         );
+
+    border: 1px solid rgba(255, 65, 65, 0.32);
+
+    box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.055),
+        0 4px 14px rgba(255, 48, 48, 0.06);
+}
+
+
+/* subtle shine */
+
+.download-btn::before {
+    content: "";
+
+    position: absolute;
+
+    top: 0;
+    left: -100%;
+
+    width: 70%;
+    height: 100%;
+
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            rgba(255, 255, 255, 0.08),
+            transparent
+        );
+
+    transform: skewX(-20deg);
+
+    transition: left 0.45s ease;
+
+    pointer-events: none;
+}
+
+
+.download-btn:hover::before {
+    left: 140%;
+}
+
+
+.download-btn:hover {
+    color: white;
+
+    background:
+        linear-gradient(
+            180deg,
+            rgba(255, 55, 55, 0.25),
+            rgba(255, 40, 40, 0.13)
+        );
+
+    border-color: rgba(255, 70, 70, 0.55);
+
+    transform: translateY(-2px);
+
+    box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.07),
+        0 7px 22px rgba(255, 48, 48, 0.13);
+}
+
+
+.download-btn:active {
+    transform: translateY(0);
+
+    box-shadow:
+        0 3px 10px rgba(255, 48, 48, 0.08);
+}
+
+
+/* =========================
+   GITHUB
+========================= */
+
+.github {
+    background:
+        rgba(255, 255, 255, 0.025);
+
+    color: #dfe2e8;
+
+    border: 1px solid var(--border);
+
+    box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.025);
+}
+
+
+.github:hover {
+    background:
+        rgba(255, 255, 255, 0.055);
+
+    border-color:
+        var(--border-hover);
 
     color: white;
 
-    border: 1px solid rgba(255, 255, 255, 0.05);
+    transform: translateY(-2px);
 
     box-shadow:
-        0 5px 16px rgba(255, 48, 48, 0.12);
-}
-
-.download:hover {
-    background:
-        linear-gradient(
-            180deg,
-            #ff4b4b,
-            #f02c2c
-        );
-
-    transform: translateY(-1px);
-
-    box-shadow:
-        0 7px 20px rgba(255, 48, 48, 0.2);
+        0 7px 20px rgba(0, 0, 0, 0.2);
 }
 
 
-/* =========================================================
-   COMMAND BOX
-========================================================= */
+.github:active {
+    transform: translateY(0);
+}
+
+
+/* =========================
+   SINGLE BUTTON
+========================= */
+
+.buttons:has(.download-btn:only-child) {
+    width: 100%;
+}
+
+
+.buttons:has(.github:only-child) {
+    width: 100%;
+}
+
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width: 450px) {
+
+    .buttons {
+        gap: 7px;
+    }
+
+    .buttons a {
+        min-height: 37px;
+
+        font-size: 10px;
+    }
+
+}
+
+/* =========================
+   COMMAND
+========================= */
 
 .command-box {
-    position: relative;
-
     background: #08090d;
 
     border: 1px solid rgba(255, 255, 255, 0.065);
@@ -795,13 +676,9 @@ nav {
 
     padding: 11px 12px;
 
-    margin-top: 13px;
-
-    margin-bottom: 9px;
+    margin: 13px 0 9px;
 
     overflow-x: auto;
-
-    scrollbar-width: thin;
 }
 
 .command-box code {
@@ -823,50 +700,35 @@ nav {
     word-break: break-word;
 }
 
-
-/* =========================================================
-   COPY COMMAND BUTTON
-========================================================= */
-
 .copy-command-btn {
     width: 100%;
 
-    border: 1px solid var(--border);
-
-    background:
-        rgba(255, 255, 255, 0.035);
-
-    color: #c5c9d1;
-
     padding: 9px;
 
+    border: 1px solid var(--border);
+
     border-radius: 8px;
+
+    background: rgba(255, 255, 255, 0.035);
+
+    color: #c5c9d1;
 
     cursor: pointer;
 
     font-size: 10px;
 
     font-weight: 700;
-
-    transition:
-        background 0.2s ease,
-        border-color 0.2s ease,
-        color 0.2s ease;
 }
 
 .copy-command-btn:hover {
-    background:
-        rgba(255, 255, 255, 0.07);
-
-    border-color: var(--border-hover);
+    background: rgba(255, 255, 255, 0.07);
 
     color: white;
 }
 
-
-/* =========================================================
+/* =========================
    NO RESULTS
-========================================================= */
+========================= */
 
 .no-results {
     grid-column: 1 / -1;
@@ -880,10 +742,9 @@ nav {
     font-size: 13px;
 }
 
-
-/* =========================================================
+/* =========================
    SCROLLBAR
-========================================================= */
+========================= */
 
 ::-webkit-scrollbar {
     width: 8px;
@@ -898,100 +759,52 @@ nav {
     background: #252832;
 
     border-radius: 10px;
-
-    border: 2px solid var(--bg);
 }
 
 ::-webkit-scrollbar-thumb:hover {
     background: #353946;
 }
 
-
-/* =========================================================
-   SELECTION
-========================================================= */
-
-::selection {
-    background: rgba(255, 48, 48, 0.25);
-
-    color: white;
-}
-
-
-/* =========================================================
+/* =========================
    MOBILE
-========================================================= */
+========================= */
 
 @media (max-width: 700px) {
 
     nav {
         height: 64px;
-
-        padding:
-            0
-            18px;
+        padding: 0 18px;
     }
 
     .logo {
         font-size: 18px;
-
-        letter-spacing: -0.5px;
     }
 
     .badge {
         display: none;
     }
 
-
-    /* HERO */
-
     .hero {
-        padding:
-            75px
-            18px
-            45px;
-    }
-
-    .hero::before {
-        width: 350px;
-        height: 180px;
-
-        filter: blur(70px);
+        padding: 75px 18px 45px;
     }
 
     .hero h1 {
         font-size: 43px;
-
         letter-spacing: -2.5px;
     }
 
     .hero p {
         font-size: 13px;
-
-        max-width: 450px;
     }
-
-
-    /* SEARCH */
 
     #search {
         margin-top: 27px;
-
-        padding:
-            15px
-            16px;
     }
-
-
-    /* TABS */
 
     .tabs {
         justify-content: flex-start;
 
-        padding:
-            0
-            18px
-            25px;
+        padding: 0 18px 25px;
 
         overflow-x: auto;
 
@@ -1008,65 +821,26 @@ nav {
         flex-shrink: 0;
 
         min-width: 94px;
-
-        padding:
-            11px
-            17px;
     }
 
-
-    /* GRID */
-
     #tools {
-        padding:
-            0
-            18px
-            60px;
+        padding: 0 18px 60px;
 
         grid-template-columns: 1fr;
 
         gap: 12px;
     }
 
-
-    /* CARD */
-
     .tool-card {
         padding: 18px;
-
-        border-radius: 12px;
-    }
-
-    .tool-card:hover {
-        transform: translateY(-2px);
-    }
-
-    .tool-header h2,
-    .tool-header h3 {
-        font-size: 15px;
-    }
-
-    .tool-card p,
-    .tool-description {
-        font-size: 12px;
     }
 }
-
-
-/* =========================================================
-   SMALL PHONES
-========================================================= */
 
 @media (max-width: 400px) {
 
     .hero h1 {
         font-size: 38px;
-
         letter-spacing: -2px;
-    }
-
-    .hero {
-        padding-top: 65px;
     }
 
     .tool-card {

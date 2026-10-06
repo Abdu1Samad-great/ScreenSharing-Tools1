@@ -309,7 +309,8 @@ const tools = [
     category: "all",
     description: "View files opened or saved through Windows dialogs.",
     tags: ["Files", "Forensics"],
-    download: "https://www.nirsoft.net/utils/opensavefilesview-x64.zip",
+    download:
+      "https://www.nirsoft.net/utils/opensavefilesview-x64.zip",
   },
 
   {
@@ -407,16 +408,6 @@ const tools = [
   // =========================
   // MSC TOOLS
   // =========================
-
-  {
-    name: "RegistryScanner",
-    creator: "#Inkenal",
-    category: "msc",
-    description: "Windows registry scanning utility.",
-    tags: ["Registry", "MSC"],
-    github: "https://github.com/Inkenal/RegistryScanner",
-  },
-
   {
     name: "BrowserChecker",
     creator: "#Ricniclac2",
@@ -425,44 +416,6 @@ const tools = [
     tags: ["Browser", "MSC"],
     download:
       "https://github.com/ricniclac2/msc-browser-scanner/releases/download/Beta/MSC.Browser.Scanner.Setup.1.0.0.exe",
-  },
-
-  {
-    name: "VigilsTaskParser",
-    creator: "#Inkenal",
-    category: "msc",
-    description: "Task and scheduled task parser.",
-    tags: ["Tasks", "MSC"],
-    github: "https://github.com/Inkenal/TaskParser",
-  },
-
-  {
-    name: "MarsPixelDumpAnalyzer",
-    creator: "#Zedoonvm1",
-    category: "msc",
-    description: "Analyzes Mars Pixel dump data.",
-    tags: ["Dump", "MSC"],
-    github: "https://github.com/zedoonvm1/MarsPixelDumpAnalyzer",
-  },
-
-  {
-    name: "MSCEventViewer",
-    creator: "#Piespeas",
-    category: "msc",
-    description: "Windows event viewer utility.",
-    tags: ["Events", "MSC"],
-    download:
-      "https://github.com/piespeas/MSC-Event-Viewer/releases/download/BETA/Event.Viewer.MSC.exe",
-  },
-
-  {
-    name: "LOLDrivers",
-    creator: "#Rtfmkiesel",
-    category: "msc",
-    description: "LOLDrivers client for researching vulnerable drivers.",
-    tags: ["Drivers", "MSC"],
-    download:
-      "https://github.com/rtfmkiesel/loldrivers-client/releases/download/v2.0.1/LOLDrivers-client_Windows_amd64.zip",
   },
 
   // =========================
@@ -777,7 +730,8 @@ const tools = [
     name: "Velociraptor",
     creator: "#Velocidex",
     category: "all",
-    description: "Digital forensic investigation and endpoint visibility platform.",
+    description:
+      "Digital forensic investigation and endpoint visibility platform.",
     tags: ["Forensics", "Endpoint"],
     download:
       "https://github.com/Velocidex/velociraptor/releases/download/v0.77.3/velociraptor-v0.77.3-windows-amd64.msi",
@@ -787,7 +741,8 @@ const tools = [
     name: "HollowHunter",
     creator: "#Hasherezade",
     category: "all",
-    description: "Memory analysis tool for detecting process hollowing.",
+    description:
+      "Memory analysis tool for detecting process hollowing.",
     tags: ["Memory", "Hollowing"],
     download:
       "https://github.com/hasherezade/hollows_hunter/releases/download/v0.4.1.1/hollows_hunter64.exe",
@@ -803,7 +758,8 @@ const tools = [
     category: "modanalyzer",
     description: "PowerShell-based Minecraft mod analyzer.",
     tags: ["Mod Analyzer", "PowerShell"],
-    command: `powershell -ExecutionPolicy Bypass -Command "Invoke-Expression (Invoke-RestMethod 'https://raw.githubusercontent.com/MeowTonynoh/MeowModAnalyzer/main/MeowModAnalyzer.ps1')"`
+    command:
+      `powershell -ExecutionPolicy Bypass -Command "Invoke-Expression (Invoke-RestMethod 'https://raw.githubusercontent.com/MeowTonynoh/MeowModAnalyzer/main/MeowModAnalyzer.ps1')"`
   },
 
   {
@@ -812,9 +768,39 @@ const tools = [
     category: "modanalyzer",
     description: "PowerShell-based Minecraft mod analyzer.",
     tags: ["Mod Analyzer", "PowerShell"],
-    command: `powershell Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass && powershell Invoke-Expression (Invoke-RestMethod https://raw.githubusercontent.com/HabibiHadron/HabibiModAnalyzer/refs/heads/main/HabibiModAnalyzer.ps1)`
+    command:
+      `powershell Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass && powershell Invoke-Expression (Invoke-RestMethod https://raw.githubusercontent.com/HabibiHadron/HabibiModAnalyzer/refs/heads/main/HabibiModAnalyzer.ps1)`
   }
 ];
+
+
+// =====================================
+// CLEAN VALUES
+// =====================================
+
+function cleanName(value) {
+  return String(value || "")
+    .replace(/^#+/, "")
+    .trim();
+}
+
+
+function cleanUrl(value) {
+  const url = String(value || "").trim();
+
+  // Converts:
+  // [Example](https://example.com)
+  // into:
+  // https://example.com
+
+  const match = url.match(/^\[.*?\]\((.*?)\)$/);
+
+  if (match) {
+    return match[1];
+  }
+
+  return url;
+}
 
 
 // =====================================
@@ -823,91 +809,179 @@ const tools = [
 
 function createToolCard(tool) {
   const card = document.createElement("div");
+
   card.className = "tool-card";
 
+
+  // =====================================
+  // TAGS
+  // =====================================
+
   const tags = (tool.tags || [])
-    .map(tag => `<span class="tag">#${tag.replace(/^#/, "")}</span>`)
+    .map(tag => `
+      <span class="tag">
+        ${escapeHtml(cleanName(tag))}
+      </span>
+    `)
     .join("");
+
+
+  // =====================================
+  // CREATOR
+  // =====================================
+
+  const creator = cleanName(tool.creator);
+
+
+  // =====================================
+  // ACTION
+  // =====================================
 
   let action = "";
 
+
+  // COMMAND TOOL
   if (tool.command) {
+
     action = `
       <div class="command-box">
         <code>${escapeHtml(tool.command)}</code>
       </div>
 
-      <button class="copy-command-btn" data-command="${escapeAttr(tool.command)}">
+      <button
+        class="copy-command-btn"
+        data-command="${escapeAttr(tool.command)}"
+      >
         Copy Command
       </button>
     `;
-  } else if (tool.download) {
+  }
+
+
+  // DOWNLOAD TOOL
+  else if (tool.download) {
+
+    const url = cleanUrl(tool.download);
+
     action = `
-      <a
-        class="download-btn"
-        href="${tool.download}"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        Download
-      </a>
-    `;
-  } else if (tool.github) {
-    action = `
-      <a
-        class="download-btn"
-        href="${tool.github}"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        GitHub
-      </a>
+      <div class="buttons">
+        <a
+          class="download-btn"
+          href="${escapeAttr(url)}"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Download
+        </a>
+      </div>
     `;
   }
+
+
+  // GITHUB TOOL
+  else if (tool.github) {
+
+    const url = cleanUrl(tool.github);
+
+    action = `
+      <div class="buttons">
+        <a
+          class="download-btn"
+          href="${escapeAttr(url)}"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          GitHub
+        </a>
+      </div>
+    `;
+  }
+
+
+  // =====================================
+  // CARD HTML
+  // =====================================
 
   card.innerHTML = `
     <div class="tool-header">
       <div>
-        <h3>${escapeHtml(tool.name)}</h3>
-        <span class="creator">${escapeHtml(tool.creator || "")}</span>
+
+        <h3>
+          ${escapeHtml(tool.name)}
+        </h3>
+
+        <span class="creator">
+          ${escapeHtml(creator)}
+        </span>
+
       </div>
     </div>
+
 
     <p class="tool-description">
       ${escapeHtml(tool.description || "")}
     </p>
 
+
     <div class="tool-tags">
       ${tags}
     </div>
 
+
     ${action}
   `;
 
-  const copyButton = card.querySelector(".copy-command-btn");
+
+  // =====================================
+  // COPY COMMAND BUTTON
+  // =====================================
+
+  const copyButton =
+    card.querySelector(".copy-command-btn");
+
 
   if (copyButton) {
+
     copyButton.addEventListener("click", async () => {
-      const command = copyButton.dataset.command;
+
+      const command =
+        copyButton.dataset.command;
+
 
       try {
+
         await navigator.clipboard.writeText(command);
 
-        const oldText = copyButton.textContent;
         copyButton.textContent = "Copied!";
 
-        setTimeout(() => {
-          copyButton.textContent = oldText;
-        }, 1500);
-      } catch {
-        copyButton.textContent = "Copy Failed";
 
         setTimeout(() => {
-          copyButton.textContent = "Copy Command";
+
+          copyButton.textContent =
+            "Copy Command";
+
         }, 1500);
+
+
+      } catch {
+
+        copyButton.textContent =
+          "Copy Failed";
+
+
+        setTimeout(() => {
+
+          copyButton.textContent =
+            "Copy Command";
+
+        }, 1500);
+
       }
+
     });
+
   }
+
 
   return card;
 }
@@ -918,6 +992,7 @@ function createToolCard(tool) {
 // =====================================
 
 function escapeHtml(value) {
+
   return String(value)
     .replaceAll("&", "&amp;")
     .replaceAll("<", "&lt;")
@@ -926,61 +1001,122 @@ function escapeHtml(value) {
     .replaceAll("'", "&#039;");
 }
 
+
 function escapeAttr(value) {
   return escapeHtml(value);
 }
 
 
 // =====================================
-// RENDER TOOLS
+// DOM ELEMENTS
 // =====================================
 
-const toolsContainer = document.querySelector("#tools-container");
-const searchInput = document.querySelector("#search");
-const tabs = document.querySelectorAll(".tab");
+const toolsContainer =
+  document.querySelector("#tools");
+
+const searchInput =
+  document.querySelector("#search");
+
+const tabs =
+  document.querySelectorAll(".tab");
+
 
 let currentCategory = "all";
 
+
+// =====================================
+// RENDER TOOLS
+// =====================================
+
 function renderTools() {
-  if (!toolsContainer) return;
+
+  if (!toolsContainer) {
+
+    console.error(
+      "Tools container #tools was not found."
+    );
+
+    return;
+  }
+
 
   const search =
-    searchInput?.value?.trim().toLowerCase() || "";
+    searchInput?.value
+      ?.trim()
+      .toLowerCase() || "";
+
 
   toolsContainer.innerHTML = "";
 
-  const filteredTools = tools.filter(tool => {
-    const matchesCategory =
-      currentCategory === "all" ||
-      tool.category === currentCategory;
 
-    const searchableText = [
-      tool.name,
-      tool.creator,
-      tool.description,
-      ...(tool.tags || [])
-    ]
-      .join(" ")
-      .toLowerCase();
+  const filteredTools =
+    tools.filter(tool => {
 
-    const matchesSearch =
-      !search || searchableText.includes(search);
+      // Category
+      const matchesCategory =
+        currentCategory === "all" ||
+        tool.category === currentCategory;
 
-    return matchesCategory && matchesSearch;
-  });
+
+      // Searchable content
+      const searchableText = [
+
+        tool.name,
+
+        cleanName(tool.creator),
+
+        tool.description,
+
+        ...(tool.tags || []).map(tag =>
+          cleanName(tag)
+        )
+
+      ]
+        .join(" ")
+        .toLowerCase();
+
+
+      const matchesSearch =
+        !search ||
+        searchableText.includes(search);
+
+
+      return (
+        matchesCategory &&
+        matchesSearch
+      );
+
+    });
+
+
+  // =====================================
+  // NO RESULTS
+  // =====================================
 
   if (filteredTools.length === 0) {
+
     toolsContainer.innerHTML = `
       <div class="no-results">
         No tools found.
       </div>
     `;
+
     return;
   }
 
+
+  // =====================================
+  // CREATE CARDS
+  // =====================================
+
   filteredTools.forEach(tool => {
-    toolsContainer.appendChild(createToolCard(tool));
+
+    toolsContainer.appendChild(
+      createToolCard(tool)
+    );
+
   });
+
 }
 
 
@@ -989,16 +1125,29 @@ function renderTools() {
 // =====================================
 
 tabs.forEach(tab => {
-  tab.addEventListener("click", () => {
-    tabs.forEach(t => t.classList.remove("active"));
 
+  tab.addEventListener("click", () => {
+
+    // Remove active from all tabs
+    tabs.forEach(t =>
+      t.classList.remove("active")
+    );
+
+
+    // Activate clicked tab
     tab.classList.add("active");
 
+
+    // Get category
     currentCategory =
       tab.dataset.category || "all";
 
+
+    // Re-render
     renderTools();
+
   });
+
 });
 
 
@@ -1007,7 +1156,12 @@ tabs.forEach(tab => {
 // =====================================
 
 if (searchInput) {
-  searchInput.addEventListener("input", renderTools);
+
+  searchInput.addEventListener(
+    "input",
+    renderTools
+  );
+
 }
 
 
